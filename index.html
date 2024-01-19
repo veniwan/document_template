@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>veniwan</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="written by veniwan. Author, base on docsify.">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <!-- favicon +v=1是为了防止浏览器缓存 -->
+  <link rel="shortcut icon" type="image/x-icon" href="_static/favicon.ico?v=1" />
+  <link rel="stylesheet" title="vue" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="stylesheet" title="dark" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/dark.css">
+  <!-- <link rel="stylesheet" title="buble" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/buble.css"> -->
+  <!-- <link rel="stylesheet" title="pure" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/pure.css"> -->
+  <!-- <link rel="stylesheet" title="dolphin" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/dolphin.css"> -->
+
+  <!-- 返回头部 -->
+  <link rel="stylesheet" href="_static/back-to-top.css">
+  <script src="_static/back-to-top.js"></script>
+</head>
+<body>
+  <div id="app">404</div>
+  <script>
+    window.$docsify = {
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md',
+        '/.*/_navbar.md': '/_navbar.md',
+      },
+      name: 'veniwan',
+      // 配置仓库地址链接，右上角有个github图标，为空不显示
+      repo: 'https://github.com/veniwan/veniwan.github.io',
+      auto2top: true,
+      nameLink: '/',
+      // routerMode: 'history',  // default: 'hash'; 由于嵌入文档不需要url好看，所以此处注释；否则页面直接访问子路由会404
+      // 封面支持，默认加载的是项目根目录下的_coverpage.md文件
+      coverpage: false,
+      // ext: ".md",
+      topMargin: 40,
+      loadSidebar: true,
+      loadNavbar: true,
+      // 小屏设备下合并导航栏到侧边栏
+      mergeNavbar: true,
+      maxLevel: 4,
+      subMaxLevel: 2,
+      // hideSidebar: false,
+      notFoundPage: '/_404.md',
+      search: {
+        paths: './',
+        placeholder: '搜索关键字...',
+        noData: '没有结果',
+        depth: 6,
+      },
+      /*
+      requestHeaders: {
+        'x-token': 'xxx',
+        'cache-control': 'max-age=600',
+      },*/
+      // logo: '/_media/logo.png',
+      //Latex设置
+      latex: {
+        inlineMath   : [['$', '$'], ['\\(', '\\)']],
+        displayMath  : [['$$', '$$']],
+        customOptions: {}
+      },
+      pagination: {
+        previousText: '上一章节',
+        nextText: '下一章节',
+      },
+      copyCode: {
+        buttonText: {
+          '/': '点击复制',
+        },
+        errorText: {
+          '/': '错误',
+        },
+        successText: {
+          '/': '复制成功',
+        },
+      },
+      // 字数统计
+      // count:{
+      //   countable:true,
+      //   fontsize:'0.9em',
+      //   color:'rgb(90,90,90)',
+      //   language:'chinese'
+      // },
+      // 流量访问统计
+      // matomo: {
+      //   host: '//matomo.thunderwave.de',
+      //   id: 6,
+      // },
+      // 代码折叠
+      hideCode: {
+        scroll: false,  // 启用滚动
+        height: 300  // 折叠高度
+      },
+      markdown: {
+        renderer: {
+          code: function(code, lang) {
+            if (lang === "mermaid") {
+              return (
+                '<div class="mermaid">' + mermaid.render('mermaid-svg-' + num++, code) + "</div>"
+              );
+            }
+            return this.origin.code.apply(this, arguments);
+          }
+        }
+      },
+      plugins: [
+        function(hook, vm) {
+          var footer = [
+            '<hr/>',
+            '<footer>',
+            '<a a href="https://veniwan.github.io" target="_blank" style="position: fixed;bottom: 0; width:100%;text-decoration: auto;">Powered by veniwan &copy;2024</a>',
+            '</footer>'
+          ].join('');
+
+          hook.beforeEach(function(html) {
+            if (/githubusercontent\.com/.test(vm.route.file)) {
+              url = vm.route.file
+                .replace('raw.githubusercontent.com', 'github.com')
+                .replace(/\/master/, '/blob/master')
+            } else {
+              url = 'https://github.com/apolloconfig/apollo/blob/master/docs/' + vm.route.file
+            }
+            var header = '[:memo: 编辑文档](' + url + ')\n\n'
+
+            return header + html;
+          });
+          hook.afterEach(function(html) {
+            return html + footer;
+          })
+
+          // 防止iframe跳转套娃
+          hook.mounted(function() {
+            document.getElementsByClassName("app-name-link")[0].setAttribute("target", "_blank");
+          });
+        }
+      ],
+    }
+  </script>
+
+  <!-- src都已download至_static目录下 -->
+  <!-- docsify的js依赖 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <!-- 搜索功能支持 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <!-- 谷歌统计，需要配置track id或data-ga -->
+  <!-- <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/ga.min.js"></script> -->
+  <!-- <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/matomo.min.js"></script> -->
+  <!-- 代码渲染支持 -->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-markdown.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-nginx.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-php.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-lua.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-sql.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-go.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-mongodb.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-xml-doc.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-properties.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+
+  <script src="//cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js"></script>
+  <!-- <script src="//cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script> -->
+
+  <!-- 基于Preact和Github Issue的评论系统 -->
+  <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css"> -->
+  <!-- <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script> -->
+  
+  <!-- 图片放大缩小支持 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <!-- emoji表情支持，docsify4.13新版本插件不支持，参见内置nativeEmoji：https://docsify.js.org/#/emoji -->
+  <!-- <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script> -->
+  <!-- 分页-分章节 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+
+  <!-- 字数统计 -->
+  <!-- <script src="//unpkg.com/docsify-count/dist/countable.js"></script> -->
+
+  <!-- MathJax -->
+  <script src="//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-latex@0"></script>
+  <!-- <script src="//cdn.jsdelivr.net/npm/docsify-latex@0.5.2/dist/docsify-latex.min.js"></script> -->
+
+  <!-- 代码折叠 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-hide-code/dist/docsify-hide-code.min.js"></script>
+
+  <!-- 支持mermaid，默认markdown用marked -->
+  <script src="//unpkg.com/mermaid@8.14.0/dist/mermaid.min.js"></script>
+  <script>
+    // mermaid
+    var num = 0;
+    mermaid.initialize({ startOnLoad: false });
+  </script>
+</body>
+      
+</html>
