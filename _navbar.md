@@ -3,21 +3,12 @@
 * [:cn:](/)
 -->
 
-+ 文档主题1
-  - [文档主题1-1](docs/test.md)
-  - [文档主题1-2](docs/test.md)
++ [主题1](/topic1/)
+  - [主题1-1](/topic1/test1-1.md)
+  - [主题1-2](/topic1/test2-1.md)
 + 文档主题2
   - [文档主题2-1](docs/test.md)
   - [文档主题2-2](docs/test.md)
-+ 文档主题3
-  - [文档主题3-1](docs/test.md)
-  - [文档主题3-2](docs/test.md)
-+ 文档主题4
-  - [文档主题4-1](docs/test.md)
-  - [文档主题4-2](docs/test.md)
-+ 文档主题5
-  - [文档主题5-1](docs/test.md)
-  - [文档主题5-2](docs/test.md)
 + 外部链接
   - [docsify官网](https://docsify.js.org)
   - [veniwan](https://github.com/veniwan)

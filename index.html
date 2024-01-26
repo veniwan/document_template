@@ -23,21 +23,31 @@
   <script>
     window.$docsify = {
       alias: {
-        '/.*/_sidebar.md': '/_sidebar.md',
+        // 注释因为用每一项主题目录下的_sidebar.md侧边栏而非全局唯一
+        // '/.*/_sidebar.md': '/_sidebar.md',
         '/.*/_navbar.md': '/_navbar.md',
+        // 右侧也可写URL地址
+        '/blog/(.*)': '/docs/blog/$1',
+        '/topic1/(.*)': '/docs/topic1/$1'
       },
       name: 'veniwan',
       // 配置仓库地址链接，右上角有个github图标，为空不显示
       repo: 'https://github.com/veniwan/veniwan.github.io',
       auto2top: true,
-      nameLink: '/',
+      nameLink: {
+        '/topic1/': '#/topic1/',
+        '/': '#/',
+      },
       // routerMode: 'history',  // default: 'hash'; 由于嵌入文档不需要url好看，所以此处注释；否则页面直接访问子路由会404
       // 封面支持，默认加载的是项目根目录下的_coverpage.md文件
       coverpage: false,
       // ext: ".md",
       topMargin: 40,
       loadSidebar: true,
+      autoHeader: true,
       loadNavbar: true,
+      // 通过 {docsify-updated} 变量显示文档更新日期 - github
+      formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
       // 小屏设备下合并导航栏到侧边栏
       mergeNavbar: true,
       maxLevel: 4,
@@ -63,8 +73,8 @@
         customOptions: {}
       },
       pagination: {
-        previousText: '上一章节',
-        nextText: '下一章节',
+        previousText: '上一章',
+        nextText: '下一章',
       },
       copyCode: {
         buttonText: {
@@ -121,9 +131,11 @@
                 .replace('raw.githubusercontent.com', 'github.com')
                 .replace(/\/master/, '/blob/master')
             } else {
-              url = 'https://github.com/apolloconfig/apollo/blob/master/docs/' + vm.route.file
+              // url = 'https://github.com/veniwan/veniwan.github.io/blob/master/docs/' + vm.route.file
+              // 如站点放docs/下可取上url
+              url = 'https://github.com/veniwan/veniwan.github.io/blob/master/' + vm.route.file
             }
-            var header = '[:memo: 编辑文档](' + url + ')\n\n'
+            var header = '[:memo: 编辑文档](' + url + ')' + '<strong style="float: right;text-decoration: underline;">上次更新: {docsify-updated}</strong>' + '\n\n'
 
             return header + html;
           });
